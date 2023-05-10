@@ -8,16 +8,16 @@ import { Loading } from "@components/Loading";
 
 import {
   useFonts,
-  Inter_400Regular,
-  Inter_500Medium,
-  Inter_700Bold,
-} from "@expo-google-fonts/inter";
+  Rubik_400Regular,
+  Rubik_500Medium,
+  Rubik_700Bold,
+} from "@expo-google-fonts/rubik";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_700Bold,
+    Rubik_400Regular,
+    Rubik_500Medium,
+    Rubik_700Bold,
   });
 
   return (

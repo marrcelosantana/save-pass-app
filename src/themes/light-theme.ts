@@ -21,9 +21,9 @@ export const lightTheme = {
   },
 
   FONT_FAMILY: {
-    REGULAR: "Inter_400Regular",
-    MEDIUM: "Inter_500Medium",
-    BOLD: "Inter_700Bold",
+    REGULAR: "Rubik_400Regular",
+    MEDIUM: "Rubik_500Medium",
+    BOLD: "Rubik_700Bold",
   },
 
   FONT_SIZE: {

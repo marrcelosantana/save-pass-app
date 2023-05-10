@@ -4,6 +4,9 @@ import { Pressable, View } from "react-native";
 import { useTheme } from "styled-components/native";
 import { ArrowLeft, Eye, EyeSlash } from "phosphor-react-native";
 
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
+
 import { Input } from "@components/Input";
 
 import {
@@ -16,8 +19,6 @@ import {
   HeaderTitle,
   Label,
 } from "./styles";
-import { useNavigation } from "@react-navigation/native";
-import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 export function Register() {
   const [passwordIsHidden, setPasswordIsHidden] = useState(true);

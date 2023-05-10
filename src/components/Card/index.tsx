@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTheme } from "styled-components/native";
 
 import { Eye, EyeSlash } from "phosphor-react-native";
@@ -7,12 +8,15 @@ import { Button, Container, Title, Info, Subtitle } from "./styles";
 
 interface Props {
   service: ServiceDTO;
-  isHidden: boolean;
-  handleShowPassword: () => void;
 }
 
-export function Card({ service, isHidden, handleShowPassword }: Props) {
+export function Card({ service }: Props) {
+  const [isHidden, setIsHidden] = useState(true);
   const theme = useTheme();
+
+  function handleShowPassword() {
+    setIsHidden(!isHidden);
+  }
 
   return (
     <Container isHidden={isHidden}>

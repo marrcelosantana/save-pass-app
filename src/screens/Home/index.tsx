@@ -4,6 +4,9 @@ import { FlatList } from "react-native";
 import { MagnifyingGlass, Plus } from "phosphor-react-native";
 import uuid from "react-native-uuid";
 
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
+
 import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { Card } from "@components/Card";
@@ -24,8 +27,6 @@ import {
 } from "./styles";
 
 export function Home() {
-  const [isHidden, setIsHidden] = useState(true);
-
   const [data, setData] = useState<ServiceDTO[]>([
     {
       id: String(uuid.v4()),
@@ -49,8 +50,10 @@ export function Home() {
     },
   ]);
 
-  function showPassword() {
-    setIsHidden(!isHidden);
+  const navigator = useNavigation<AppNavigatorRoutesProps>();
+
+  function goToRegister() {
+    navigator.navigate("register");
   }
 
   return (
@@ -58,7 +61,7 @@ export function Home() {
       <Header>
         <UserInfo />
 
-        <AddButton>
+        <AddButton onPress={goToRegister}>
           <Plus size={22} color="#fff" />
         </AddButton>
       </Header>
@@ -80,13 +83,7 @@ export function Home() {
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Card
-                isHidden={isHidden}
-                handleShowPassword={showPassword}
-                service={item}
-              />
-            )}
+            renderItem={({ item }) => <Card service={item} />}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 24 }}
           />

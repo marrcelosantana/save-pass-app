@@ -3,7 +3,10 @@ import { Avatar, Container, Info, Subtitle, Title } from "./styles";
 export function UserInfo() {
   return (
     <Container>
-      <Avatar source={{ uri: "https://github.com/marrcelosantana.png" }} />
+      <Avatar
+        source={{ uri: "https://github.com/marrcelosantana.png" }}
+        resizeMode="cover"
+      />
 
       <Info>
         <Title numberOfLines={1}>Olá, Marcelo</Title>

@@ -2,9 +2,9 @@ import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { NativeBaseProvider } from "native-base";
 
-import { Home } from "@screens/Home";
 import { lightTheme } from "@themes/light-theme";
 import { Loading } from "@components/Loading";
+import { Routes } from "@routes/index";
 
 import {
   useFonts,
@@ -28,7 +28,7 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-        {fontsLoaded ? <Home /> : <Loading />}
+        {fontsLoaded ? <Routes /> : <Loading />}
       </ThemeProvider>
     </NativeBaseProvider>
   );

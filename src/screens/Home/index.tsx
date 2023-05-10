@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FlatList } from "react-native";
 
 import { MagnifyingGlass, Plus } from "phosphor-react-native";
+import uuid from "react-native-uuid";
 
 import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
@@ -27,18 +28,21 @@ export function Home() {
 
   const [data, setData] = useState<ServiceDTO[]>([
     {
+      id: String(uuid.v4()),
       name: "Plataforma Rockeseat",
       email: "marcelo@email.com",
       password: "4878f0fgsbhfk",
     },
 
     {
+      id: String(uuid.v4()),
       name: "Twitch",
       email: "marcelinho19@email.com",
       password: "36844-09ni",
     },
 
     {
+      id: String(uuid.v4()),
       name: "Linkedin",
       email: "marcelosantana@email.com",
       password: "PASS-408850F=@",
@@ -75,7 +79,7 @@ export function Home() {
         <CardList>
           <FlatList
             data={data}
-            keyExtractor={(item) => item.email}
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Card
                 isHidden={isHidden}

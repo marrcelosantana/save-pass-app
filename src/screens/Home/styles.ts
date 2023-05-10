@@ -49,7 +49,7 @@ export const Info = styled.View`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  margin-top: ${RFValue(20)}px;
+  margin-top: ${RFValue(30)}px;
   flex-direction: row;
 `;
 
@@ -64,4 +64,9 @@ export const Subtitle = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   color: ${({ theme }) => theme.COLORS.TEXT};
   font-size: ${RFValue(10)}px;
+`;
+
+export const CardList = styled.View`
+  margin-top: 20px;
+  flex: 1;
 `;

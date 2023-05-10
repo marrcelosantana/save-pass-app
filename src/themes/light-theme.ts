@@ -6,6 +6,8 @@ export const lightTheme = {
     GREEN_500: "#00B37E",
 
     BLUE_500: "#1966fb",
+    LIGHT_BLUE: "rgba(25,102,251, 0.5)",
+
     YELLOW_500: "#ffcc01",
 
     RED: "#F75A68",

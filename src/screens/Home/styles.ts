@@ -10,16 +10,17 @@ export const Container = styled.View`
 export const Header = styled.View`
   width: 100%;
   height: ${RFValue(150)}px;
+  align-items: center;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.COLORS.BLUE_500};
-  padding: ${RFValue(60)}px ${RFValue(20)}px;
+  padding: ${RFValue(20)}px ${RFValue(20)}px 0px ${RFValue(20)}px;
   flex-direction: row;
 `;
 
 export const AddButton = styled.Pressable`
   width: ${RFValue(38)}px;
   height: ${RFValue(38)}px;
-  border: 0.5px solid ${({ theme }) => theme.COLORS.SHAPE};
+  border: 1px dotted ${({ theme }) => theme.COLORS.SHAPE};
   border-radius: 6px;
   align-items: center;
   justify-content: center;
@@ -27,7 +28,21 @@ export const AddButton = styled.Pressable`
 
 export const Content = styled.View`
   flex: 1;
-  padding: 0 ${RFValue(20)}px;
+  padding: 0px ${RFValue(20)}px;
+`;
+
+export const Form = styled.View`
+  width: 100%;
+  flex-direction: row;
+  margin-top: ${RFValue(-20)}px;
+`;
+
+export const SearchButton = styled.Pressable`
+  width: 15%;
+  height: 48px;
+  background-color: ${({ theme }) => theme.COLORS.YELLOW_500};
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Info = styled.View`

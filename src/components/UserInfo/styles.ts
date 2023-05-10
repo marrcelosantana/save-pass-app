@@ -4,6 +4,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   flex-direction: row;
+  align-items: center;
+  width: 60%;
 `;
 
 export const Avatar = styled.Image`
@@ -15,17 +17,16 @@ export const Avatar = styled.Image`
 
 export const Info = styled.View`
   justify-content: center;
-  margin-top: ${RFValue(6)}px;
 `;
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   color: ${({ theme }) => theme.COLORS.SHAPE};
-  font-size: ${RFValue(12)}px;
+  font-size: ${RFValue(14)}px;
 `;
 
 export const Subtitle = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   color: ${({ theme }) => theme.COLORS.SHAPE};
-  font-size: ${RFValue(10)}px;
+  font-size: ${RFValue(12)}px;
 `;

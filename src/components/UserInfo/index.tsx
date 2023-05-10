@@ -6,7 +6,7 @@ export function UserInfo() {
       <Avatar source={{ uri: "https://github.com/marrcelosantana.png" }} />
 
       <Info>
-        <Title>Olá, Marcelo</Title>
+        <Title numberOfLines={1}>Olá, Marcelo</Title>
         <Subtitle>Sinta-se seguro aqui</Subtitle>
       </Info>
     </Container>

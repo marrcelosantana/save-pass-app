@@ -24,7 +24,7 @@ export default function App() {
     <NativeBaseProvider>
       <ThemeProvider theme={lightTheme}>
         <StatusBar
-          barStyle="dark-content"
+          barStyle="light-content"
           backgroundColor="transparent"
           translucent
         />

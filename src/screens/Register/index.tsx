@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pressable, View } from "react-native";
 
 import { useTheme } from "styled-components/native";
-import { ArrowLeft, Eye, EyeSlash } from "phosphor-react-native";
+import { CaretLeft, Eye, EyeSlash } from "phosphor-react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
@@ -34,7 +34,7 @@ export function Register() {
     <Container>
       <Header>
         <Pressable onPress={() => navigator.goBack()}>
-          <ArrowLeft size={28} color="#fff" />
+          <CaretLeft size={28} color={theme.COLORS.TEXT} />
         </Pressable>
         <HeaderTitle>Cadastro de senha</HeaderTitle>
         <View />
@@ -58,13 +58,13 @@ export function Register() {
             rightElement={
               <Pressable onPress={handleShowPassword}>
                 {passwordIsHidden ? (
-                  <Eye
+                  <EyeSlash
                     size={22}
                     color={theme.COLORS.TEXT_BODY}
                     style={{ marginRight: 10 }}
                   />
                 ) : (
-                  <EyeSlash
+                  <Eye
                     size={24}
                     color={theme.COLORS.TEXT_BODY}
                     style={{ marginRight: 10 }}

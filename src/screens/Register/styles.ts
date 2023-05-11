@@ -13,14 +13,15 @@ export const Header = styled.View`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  background-color: ${({ theme }) => theme.COLORS.BLUE_500};
+  background-color: ${({ theme }) => theme.COLORS.SHAPE};
   padding: ${RFValue(32)}px ${RFValue(20)}px 0px ${RFValue(20)}px;
 `;
 
 export const HeaderTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
-  color: ${({ theme }) => theme.COLORS.SHAPE};
+  color: ${({ theme }) => theme.COLORS.TITLE};
+  margin-right: ${RFValue(12)}px;
 `;
 
 export const Content = styled.View`

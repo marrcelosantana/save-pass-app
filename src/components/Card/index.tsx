@@ -40,7 +40,7 @@ export function Card({ service }: Props) {
         <Info>
           <Title isHidden={isHidden}>{service.name}</Title>
           {isHidden ? (
-            <Subtitle isHidden={isHidden}>seuemail@gmail.com</Subtitle>
+            <Subtitle isHidden={isHidden}>{service.email}</Subtitle>
           ) : (
             <Subtitle isHidden={isHidden}>{service.password}</Subtitle>
           )}

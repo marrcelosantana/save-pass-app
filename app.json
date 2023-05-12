@@ -2,6 +2,7 @@
   "expo": {
     "name": "save-pass",
     "slug": "save-pass",
+    "scheme": "save-pass",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

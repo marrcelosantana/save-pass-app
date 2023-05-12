@@ -12,6 +12,7 @@ import {
   Rubik_500Medium,
   Rubik_700Bold,
 } from "@expo-google-fonts/rubik";
+import { AuthContextProvider } from "@contexts/AuthContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,9 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-        {fontsLoaded ? <Routes /> : <Loading />}
+        <AuthContextProvider>
+          {fontsLoaded ? <Routes /> : <Loading />}
+        </AuthContextProvider>
       </ThemeProvider>
     </NativeBaseProvider>
   );

@@ -6,13 +6,15 @@ import { lightTheme } from "@themes/light-theme";
 import { Loading } from "@components/Loading";
 import { Routes } from "@routes/index";
 
+import { AuthContextProvider } from "@contexts/AuthContext";
+import { ServiceContextProvider } from "@contexts/ServicesContext";
+
 import {
   useFonts,
   Rubik_400Regular,
   Rubik_500Medium,
   Rubik_700Bold,
 } from "@expo-google-fonts/rubik";
-import { AuthContextProvider } from "@contexts/AuthContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +32,9 @@ export default function App() {
           translucent
         />
         <AuthContextProvider>
-          {fontsLoaded ? <Routes /> : <Loading />}
+          <ServiceContextProvider>
+            {fontsLoaded ? <Routes /> : <Loading />}
+          </ServiceContextProvider>
         </AuthContextProvider>
       </ThemeProvider>
     </NativeBaseProvider>

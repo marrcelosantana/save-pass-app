@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { FlatList } from "react-native";
 
 import { MagnifyingGlass, Plus } from "phosphor-react-native";
-import uuid from "react-native-uuid";
 
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
@@ -11,7 +10,7 @@ import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { Card } from "@components/Card";
 
-import { ServiceDTO } from "@models/ServiceDTO";
+import { useService } from "@hooks/useService";
 
 import {
   Container,
@@ -27,34 +26,17 @@ import {
 } from "./styles";
 
 export function Home() {
-  const [data, setData] = useState<ServiceDTO[]>([
-    {
-      id: String(uuid.v4()),
-      name: "Plataforma Rockeseat",
-      email: "marcelo@email.com",
-      password: "4878f0fgsbhfk",
-    },
-
-    {
-      id: String(uuid.v4()),
-      name: "Twitch",
-      email: "marcelinho19@email.com",
-      password: "36844-09ni",
-    },
-
-    {
-      id: String(uuid.v4()),
-      name: "Linkedin",
-      email: "marcelosantana@email.com",
-      password: "PASS-408850F=@",
-    },
-  ]);
+  const { services, loadServices } = useService();
 
   const navigator = useNavigation<AppNavigatorRoutesProps>();
 
   function goToRegister() {
     navigator.navigate("register");
   }
+
+  useEffect(() => {
+    loadServices;
+  }, []);
 
   return (
     <Container>
@@ -81,7 +63,7 @@ export function Home() {
 
         <CardList>
           <FlatList
-            data={data}
+            data={services}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => <Card service={item} />}
             showsVerticalScrollIndicator={false}

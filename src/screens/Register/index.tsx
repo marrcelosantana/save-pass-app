@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Pressable, View } from "react-native";
+import { useToast } from "native-base";
 
 import { useTheme } from "styled-components/native";
 import { CaretLeft, Eye, EyeSlash } from "phosphor-react-native";
+
+import uuid from "react-native-uuid";
 
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
@@ -12,6 +15,10 @@ import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 import { Input } from "@components/Input";
+import { ServiceDTO } from "@models/ServiceDTO";
+
+import { useAuth } from "@hooks/useAuth";
+import { useService } from "@hooks/useService";
 
 import {
   Button,
@@ -24,11 +31,11 @@ import {
   Label,
 } from "./styles";
 
-interface FormDataProps {
+type FormDataProps = {
   name: string;
   email: string;
   password: string;
-}
+};
 
 const registerSchema = yup.object({
   name: yup.string().trim().required("Informe o nome"),
@@ -45,6 +52,9 @@ const registerSchema = yup.object({
 });
 
 export function Register() {
+  const { user } = useAuth();
+  const { registerService } = useService();
+
   const [passwordIsHidden, setPasswordIsHidden] = useState(true);
 
   const { control, handleSubmit, reset } = useForm<FormDataProps>({
@@ -52,15 +62,42 @@ export function Register() {
   });
 
   const theme = useTheme();
+  const toast = useToast();
   const navigator = useNavigation<AppNavigatorRoutesProps>();
 
   function handleShowPassword() {
     setPasswordIsHidden(!passwordIsHidden);
   }
 
-  function handleRegister(data: FormDataProps) {
-    console.log(data);
-    reset();
+  async function handleRegister({ name, email, password }: FormDataProps) {
+    const newService: ServiceDTO = {
+      id: String(uuid.v4()),
+      name,
+      email,
+      password,
+      created_at: new Date(),
+    };
+
+    try {
+      await registerService(newService, user.id);
+      reset();
+
+      await toast.show({
+        title: "Registro efetuado!",
+        placement: "top",
+        background: "green.500",
+        color: "gray.100",
+      });
+
+      navigator.navigate("home");
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível registrar!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    }
   }
 
   return (

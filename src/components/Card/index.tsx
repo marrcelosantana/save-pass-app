@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { Alert } from "react-native";
+
+import { useToast } from "native-base";
 import { useTheme } from "styled-components/native";
 
 import { Eye, EyeSlash, Trash } from "phosphor-react-native";
 import { ServiceDTO } from "@models/ServiceDTO";
+
+import { useService } from "@hooks/useService";
+import { useAuth } from "@hooks/useAuth";
 
 import {
   Button,
@@ -19,11 +25,43 @@ interface Props {
 }
 
 export function Card({ service }: Props) {
+  const { user } = useAuth();
+  const { removeService } = useService();
+
   const [isHidden, setIsHidden] = useState(true);
+
   const theme = useTheme();
+  const toast = useToast();
 
   function handleShowPassword() {
     setIsHidden(!isHidden);
+  }
+
+  async function onRemove() {
+    try {
+      await removeService(service.id, user.id);
+
+      await toast.show({
+        title: "Serviço removido!",
+        placement: "top",
+        background: "orange.500",
+        color: "gray.100",
+      });
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível remover!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    }
+  }
+
+  async function handleRemoveService() {
+    Alert.alert("Remover", "Deseja remover o serviço?", [
+      { text: "Não", style: "cancel" },
+      { text: "Sim", onPress: () => onRemove() },
+    ]);
   }
 
   return (
@@ -47,7 +85,7 @@ export function Card({ service }: Props) {
         </Info>
       </LeftContent>
 
-      <RemoveButton>
+      <RemoveButton onPress={handleRemoveService}>
         <Trash size={22} color={theme.COLORS.TEXT_BODY} />
       </RemoveButton>
     </Container>

@@ -55,7 +55,6 @@ export const Info = styled.View`
 
 export const Title = styled.Text`
   font-size: ${RFValue(14)}px;
-  font-weight: bold;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   color: ${({ theme }) => theme.COLORS.TEXT};
 `;
@@ -69,4 +68,19 @@ export const Subtitle = styled.Text`
 export const CardList = styled.View`
   margin-top: 20px;
   flex: 1;
+`;
+
+export const EmptyContent = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${RFValue(140)}px;
+`;
+
+export const EmptyTitle = styled.Text`
+  font-size: ${RFValue(20)}px;
+  text-align: center;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
+  color: ${({ theme }) => theme.COLORS.TEXT_BODY};
+  margin-top: ${RFValue(10)}px;
 `;

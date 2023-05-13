@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { FlatList } from "react-native";
 
-import { MagnifyingGlass, Plus } from "phosphor-react-native";
+import { useTheme } from "styled-components/native";
+import { MagnifyingGlass, Plus, SmileySad } from "phosphor-react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
@@ -25,12 +26,15 @@ import {
   Form,
   SearchButton,
   CardList,
+  EmptyContent,
+  EmptyTitle,
 } from "./styles";
 
 export function Home() {
   const { user } = useAuth();
   const { services, loadServices } = useService();
 
+  const theme = useTheme();
   const navigator = useNavigation<AppNavigatorRoutesProps>();
 
   function goToRegister() {
@@ -63,7 +67,9 @@ export function Home() {
 
             <Info>
               <Title numberOfLines={1}>Suas senhas</Title>
-              <Subtitle numberOfLines={1}>01 ao total</Subtitle>
+              {services.length > 0 && (
+                <Subtitle numberOfLines={1}>01 ao total</Subtitle>
+              )}
             </Info>
 
             <CardList>
@@ -73,6 +79,12 @@ export function Home() {
                 renderItem={({ item }) => <Card service={item} />}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 24 }}
+                ListEmptyComponent={() => (
+                  <EmptyContent>
+                    <SmileySad size={42} color={theme.COLORS.TEXT_BODY} />
+                    <EmptyTitle>Sem registros no momento...</EmptyTitle>
+                  </EmptyContent>
+                )}
               />
             </CardList>
           </Content>

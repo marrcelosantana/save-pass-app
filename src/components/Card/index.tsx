@@ -58,7 +58,7 @@ export function Card({ service }: Props) {
   }
 
   async function handleRemoveService() {
-    Alert.alert("Remover", "Deseja remover o serviço?", [
+    Alert.alert("Remover", `Deseja remover o serviço "${service.name}"?`, [
       { text: "Não", style: "cancel" },
       { text: "Sim", onPress: () => onRemove() },
     ]);

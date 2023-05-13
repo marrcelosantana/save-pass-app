@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { useToast } from "native-base";
 
 import * as AuthSession from "expo-auth-session";
 import * as AppleAuthentication from "expo-apple-authentication";
@@ -37,8 +36,6 @@ export const AuthContext = createContext<AuthContextProps>(
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO);
   const [isLoading, setIsLoading] = useState(false);
-
-  const toast = useToast();
 
   async function signInWithGoogle() {
     try {
@@ -110,12 +107,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       setUser(response);
       setIsLoading(false);
     } catch (error) {
-      await toast.show({
-        title: "Não foi possível logar!",
-        placement: "top",
-        background: "red.500",
-        color: "gray.100",
-      });
+      throw error;
     }
   }
 

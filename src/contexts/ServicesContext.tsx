@@ -55,8 +55,6 @@ export function ServiceContextProvider({
     }
   }
 
-  async function remove() {}
-
   return (
     <ServiceContext.Provider
       value={{ services, registerService, loadServices, removeService }}

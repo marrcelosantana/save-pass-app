@@ -8,6 +8,8 @@ export const Container = styled.View`
   width: 60%;
 `;
 
+export const ProfileButton = styled.Pressable``;
+
 export const Avatar = styled.Image`
   width: ${RFValue(38)}px;
   height: ${RFValue(38)}px;

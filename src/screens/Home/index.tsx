@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { FlatList } from "react-native";
+import { useToast } from "native-base";
 
 import { useTheme } from "styled-components/native";
 import { MagnifyingGlass, Plus, SmileySad } from "phosphor-react-native";
@@ -14,6 +15,10 @@ import { Loading } from "@components/Loading";
 
 import { useService } from "@hooks/useService";
 import { useAuth } from "@hooks/useAuth";
+
+import * as yup from "yup";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   Container,
@@ -30,15 +35,47 @@ import {
   EmptyTitle,
 } from "./styles";
 
+type FormDataProps = {
+  name: string;
+};
+
+const searchSchema = yup.object({
+  name: yup.string(),
+});
+
 export function Home() {
   const { user } = useAuth();
-  const { services, loadServices } = useService();
+  const { services, setServices, loadServices } = useService();
 
   const theme = useTheme();
+  const toast = useToast();
   const navigator = useNavigation<AppNavigatorRoutesProps>();
+
+  const { control, handleSubmit } = useForm<FormDataProps>({
+    resolver: yupResolver(searchSchema),
+  });
 
   function goToRegister() {
     navigator.navigate("register");
+  }
+
+  async function handleSearch({ name }: FormDataProps) {
+    try {
+      if (name.length === 0) {
+        loadServices(user.id);
+      }
+      const filtered = services.filter((service) =>
+        service.name.toLowerCase().includes(name.toLowerCase())
+      );
+      setServices(filtered);
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível carregar os dados!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    }
   }
 
   useEffect(() => {
@@ -59,8 +96,21 @@ export function Home() {
 
           <Content>
             <Form>
-              <Input w="85%" placeholder="Qual senha você procura?" />
-              <SearchButton>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    w="85%"
+                    placeholder="Qual senha você procura?"
+                    value={value}
+                    onChangeText={onChange}
+                    autoCapitalize="none"
+                    autoComplete="off"
+                  />
+                )}
+              />
+              <SearchButton onPress={handleSubmit(handleSearch)}>
                 <MagnifyingGlass size={22} />
               </SearchButton>
             </Form>

@@ -10,6 +10,7 @@ import {
 
 export type ServiceContextProps = {
   services: ServiceDTO[];
+  setServices: (services: ServiceDTO[]) => void;
   loadServices: (userId: string) => Promise<void>;
   registerService: (service: ServiceDTO, userId: string) => Promise<void>;
   removeService: (serviceId: string, userId: string) => Promise<void>;
@@ -57,7 +58,13 @@ export function ServiceContextProvider({
 
   return (
     <ServiceContext.Provider
-      value={{ services, registerService, loadServices, removeService }}
+      value={{
+        services,
+        setServices,
+        registerService,
+        loadServices,
+        removeService,
+      }}
     >
       {children}
     </ServiceContext.Provider>

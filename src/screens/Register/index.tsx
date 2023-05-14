@@ -43,17 +43,17 @@ type FormDataProps = {
 };
 
 const registerSchema = yup.object({
-  name: yup.string().trim().required("Informe o nome"),
+  name: yup.string().trim().required("Informe o nome."),
   email: yup
     .string()
     .trim()
-    .email("Email inválido")
-    .required("Informe o email"),
+    .email("Email inválido.")
+    .required("Informe o email."),
   password: yup
     .string()
     .trim()
-    .required("Informe a senha")
-    .min(6, "A senha deve ter pelo menos 6 dígitos"),
+    .required("Informe a senha.")
+    .min(6, "A senha deve ter pelo menos 6 dígitos."),
 });
 
 export function Register() {

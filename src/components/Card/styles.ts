@@ -1,12 +1,15 @@
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 
 import { RFValue } from "react-native-responsive-fontsize";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface CardProps {
   isHidden: boolean;
 }
 
-export const Container = styled.View<CardProps>`
+export const Container = styled(LinearGradient).attrs({
+  end: { x: 1, y: 0 },
+})`
   width: 100%;
   flex-direction: row;
   height: ${RFValue(72)}px;
@@ -16,9 +19,7 @@ export const Container = styled.View<CardProps>`
   align-items: center;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
-  border: 1px solid
-    ${({ isHidden, theme }) =>
-      isHidden ? theme.COLORS.TEXT_BODY : theme.COLORS.LIGHT_BLUE};
+  border: 0.5px solid ${({ theme }) => theme.COLORS.TEXT_BODY};
 `;
 
 export const LeftContent = styled.View`
@@ -37,6 +38,7 @@ export const Title = styled.Text<CardProps>`
   color: ${({ isHidden, theme }) =>
     isHidden ? theme.COLORS.TEXT : theme.COLORS.TEXT_BODY};
   font-size: ${({ isHidden }) => (isHidden ? "16px" : "14px")};
+  text-transform: capitalize;
 `;
 
 export const Subtitle = styled.Text<CardProps>`
@@ -45,6 +47,7 @@ export const Subtitle = styled.Text<CardProps>`
   color: ${({ isHidden, theme }) =>
     isHidden ? theme.COLORS.TEXT_BODY : theme.COLORS.BLUE_500};
   font-size: ${({ isHidden }) => (isHidden ? "14px" : "16px")};
+  text-transform: lowercase;
 `;
 
 export const RemoveButton = styled.Pressable`

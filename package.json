@@ -34,7 +34,8 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-uuid": "^2.0.1",
     "styled-components-react-native": "^1.0.0",
-    "yup": "^1.1.1"
+    "yup": "^1.1.1",
+    "expo-linear-gradient": "~12.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

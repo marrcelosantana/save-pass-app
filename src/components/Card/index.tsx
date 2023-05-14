@@ -65,7 +65,7 @@ export function Card({ service }: Props) {
   }
 
   return (
-    <Container isHidden={isHidden}>
+    <Container colors={[isHidden ? "#FFF" : "#EBF2FF", "#FFF"]}>
       <LeftContent>
         <Button onPress={handleShowPassword}>
           {isHidden ? (

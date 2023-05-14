@@ -22,7 +22,6 @@ import { AppNavigatorRoutesProps } from "@routes/app.routes";
 import { Input } from "@components/Input";
 import { ServiceDTO } from "@models/ServiceDTO";
 
-import { useAuth } from "@hooks/useAuth";
 import { useService } from "@hooks/useService";
 
 import {
@@ -57,7 +56,6 @@ const registerSchema = yup.object({
 });
 
 export function Register() {
-  const { user } = useAuth();
   const { registerService } = useService();
 
   const [passwordIsHidden, setPasswordIsHidden] = useState(true);
@@ -91,7 +89,7 @@ export function Register() {
 
     try {
       setIsLoading(true);
-      await registerService(newService, user.id);
+      await registerService(newService);
       reset();
 
       await toast.show({

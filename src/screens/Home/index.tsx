@@ -14,7 +14,6 @@ import { Card } from "@components/Card";
 import { Loading } from "@components/Loading";
 
 import { useService } from "@hooks/useService";
-import { useAuth } from "@hooks/useAuth";
 
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
@@ -44,7 +43,6 @@ const searchSchema = yup.object({
 });
 
 export function Home() {
-  const { user } = useAuth();
   const { services, setServices, loadServices } = useService();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +63,7 @@ export function Home() {
     try {
       setIsLoading(true);
       if (name.length === 0) {
-        loadServices(user.id);
+        loadServices();
       }
       const filtered = services.filter((service) =>
         service.name.toLowerCase().includes(name.toLowerCase())
@@ -84,7 +82,7 @@ export function Home() {
   }
 
   useEffect(() => {
-    loadServices(user.id);
+    loadServices();
   }, []);
 
   return (

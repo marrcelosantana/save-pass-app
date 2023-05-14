@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 import { ServiceDTO } from "@models/ServiceDTO";
+import { useAuth } from "@hooks/useAuth";
 
 import {
   storageServicesCreate,
@@ -11,9 +12,9 @@ import {
 export type ServiceContextProps = {
   services: ServiceDTO[];
   setServices: (services: ServiceDTO[]) => void;
-  loadServices: (userId: string) => Promise<void>;
-  registerService: (service: ServiceDTO, userId: string) => Promise<void>;
-  removeService: (serviceId: string, userId: string) => Promise<void>;
+  loadServices: () => Promise<void>;
+  registerService: (service: ServiceDTO) => Promise<void>;
+  removeService: (serviceId: string) => Promise<void>;
 };
 
 type ServiceContextProviderProps = {
@@ -27,30 +28,31 @@ export const ServiceContext = createContext<ServiceContextProps>(
 export function ServiceContextProvider({
   children,
 }: ServiceContextProviderProps) {
+  const { user } = useAuth();
   const [services, setServices] = useState<ServiceDTO[]>([]);
 
-  async function loadServices(userId: string) {
+  async function loadServices() {
     try {
-      const data = await storageServicesGetAll(userId);
+      const data = await storageServicesGetAll(user.id);
       setServices(data);
     } catch (error) {
       throw error;
     }
   }
 
-  async function registerService(service: ServiceDTO, userId: string) {
+  async function registerService(service: ServiceDTO) {
     try {
-      await storageServicesCreate(service, userId);
-      await loadServices(userId);
+      await storageServicesCreate(service, user.id);
+      await loadServices();
     } catch (error) {
       throw error;
     }
   }
 
-  async function removeService(serviceId: string, userId: string) {
+  async function removeService(serviceId: string) {
     try {
-      await storageServicesRemove(serviceId, userId);
-      loadServices(userId);
+      await storageServicesRemove(serviceId, user.id);
+      loadServices();
     } catch (error) {
       throw error;
     }

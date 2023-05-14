@@ -9,7 +9,6 @@ import { ServiceDTO } from "@models/ServiceDTO";
 import { dateFormatter } from "@utils/formatters";
 
 import { useService } from "@hooks/useService";
-import { useAuth } from "@hooks/useAuth";
 
 import {
   Button,
@@ -28,7 +27,6 @@ interface Props {
 }
 
 export function Card({ service }: Props) {
-  const { user } = useAuth();
   const { removeService } = useService();
 
   const [isHidden, setIsHidden] = useState(true);
@@ -42,7 +40,7 @@ export function Card({ service }: Props) {
 
   async function onRemove() {
     try {
-      await removeService(service.id, user.id);
+      await removeService(service.id);
 
       await toast.show({
         title: "Serviço removido!",

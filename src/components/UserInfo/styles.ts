@@ -23,12 +23,12 @@ export const Info = styled.View`
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
-  color: ${({ theme }) => theme.COLORS.SHAPE};
+  color: #fff;
   font-size: ${RFValue(14)}px;
 `;
 
 export const Subtitle = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-  color: ${({ theme }) => theme.COLORS.SHAPE};
+  color: #fff;
   font-size: ${RFValue(12)}px;
 `;

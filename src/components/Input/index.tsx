@@ -14,7 +14,7 @@ export function Input({ ...rest }: IInputProps) {
       color={theme.COLORS.TEXT}
       _focus={{
         bg: theme.COLORS.SHAPE,
-        borderColor: theme.COLORS.BLUE_500,
+        borderColor: theme.COLORS.TEXT_BODY,
       }}
       {...rest}
     />

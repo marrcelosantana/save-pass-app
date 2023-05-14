@@ -21,7 +21,7 @@ export const HeaderTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   color: ${({ theme }) => theme.COLORS.TITLE};
-  margin-right: ${RFValue(12)}px;
+  margin-right: ${RFValue(18)}px;
 `;
 
 export const Content = styled.View`
@@ -50,7 +50,6 @@ export const Button = styled.Pressable`
 `;
 
 export const ButtonText = styled.Text`
-  color: ${({ theme }) => theme.COLORS.TEXT};
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   font-size: 16px;
 `;

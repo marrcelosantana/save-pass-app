@@ -18,7 +18,6 @@ export const Container = styled(LinearGradient).attrs({
   margin-bottom: 16px;
   align-items: center;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.COLORS.SHAPE};
   border: 0.5px solid ${({ theme }) => theme.COLORS.TEXT_BODY};
 `;
 

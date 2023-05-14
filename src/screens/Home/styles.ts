@@ -20,7 +20,7 @@ export const Header = styled.View`
 export const AddButton = styled.Pressable`
   width: ${RFValue(38)}px;
   height: ${RFValue(38)}px;
-  border: 1px dotted ${({ theme }) => theme.COLORS.SHAPE};
+  border: 1px dotted #fff;
   border-radius: 6px;
   align-items: center;
   justify-content: center;

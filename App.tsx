@@ -2,9 +2,11 @@ import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { NativeBaseProvider } from "native-base";
 
-import { lightTheme } from "@themes/light-theme";
 import { Loading } from "@components/Loading";
 import { Routes } from "@routes/index";
+
+import { lightTheme } from "@themes/light-theme";
+import { darkTheme } from "@themes/dark-theme";
 
 import { AuthContextProvider } from "@contexts/AuthContext";
 import { ServiceContextProvider } from "@contexts/ServicesContext";

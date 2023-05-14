@@ -68,13 +68,18 @@ export function Card({ service }: Props) {
   }
 
   return (
-    <Container colors={[isHidden ? "#FFF" : "#EBF2FF", "#FFF"]}>
+    <Container
+      colors={[
+        isHidden ? theme.COLORS.SHAPE : theme.COLORS.CARD_GRADIENT,
+        theme.COLORS.SHAPE,
+      ]}
+    >
       <LeftContent>
         <Button onPress={handleShowPassword}>
           {isHidden ? (
             <EyeSlash size={32} color={theme.COLORS.TEXT_BODY} />
           ) : (
-            <Eye size={32} color={theme.COLORS.LIGHT_BLUE} />
+            <Eye size={32} color={theme.COLORS.BLUE_500} />
           )}
         </Button>
 

@@ -1,6 +1,6 @@
-export const lightTheme = {
+export const darkTheme = {
   COLORS: {
-    SHAPE: "#FFF",
+    SHAPE: "#201f23",
 
     GREEN_700: "#00875F",
     GREEN_500: "#00B37E",
@@ -8,7 +8,7 @@ export const lightTheme = {
     BLUE_500: "#1966fb",
     LIGHT_BLUE: "rgba(25,102,251, 0.5)",
 
-    CARD_GRADIENT: "#EBF2FF",
+    CARD_GRADIENT: "#121214",
 
     YELLOW_500: "#ffcc01",
 
@@ -17,11 +17,11 @@ export const lightTheme = {
 
     GRAY_400: "#ababab",
 
-    TEXT: "#4d4d4d",
-    TITLE: "#363f5f",
-    TEXT_BODY: "#969cb3",
+    TEXT: "#f5f5f5",
+    TITLE: "#f4f4f4",
+    TEXT_BODY: "#9e9e9e",
 
-    BACKGROUND: "#f2f3f5",
+    BACKGROUND: "#121214",
   },
 
   FONT_FAMILY: {

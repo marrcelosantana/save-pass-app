@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { useToast } from "native-base";
 
@@ -47,6 +47,8 @@ export function Home() {
   const { user } = useAuth();
   const { services, setServices, loadServices } = useService();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const theme = useTheme();
   const toast = useToast();
   const navigator = useNavigation<AppNavigatorRoutesProps>();
@@ -61,6 +63,7 @@ export function Home() {
 
   async function handleSearch({ name }: FormDataProps) {
     try {
+      setIsLoading(true);
       if (name.length === 0) {
         loadServices(user.id);
       }
@@ -75,6 +78,8 @@ export function Home() {
         background: "orange.500",
         color: "gray.100",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -110,7 +115,10 @@ export function Home() {
                   />
                 )}
               />
-              <SearchButton onPress={handleSubmit(handleSearch)}>
+              <SearchButton
+                onPress={handleSubmit(handleSearch)}
+                isLoading={isLoading}
+              >
                 <MagnifyingGlass size={22} />
               </SearchButton>
             </Form>

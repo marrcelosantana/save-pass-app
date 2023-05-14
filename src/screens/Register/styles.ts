@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 
+import { Button } from "native-base";
 import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
@@ -39,7 +40,7 @@ export const Label = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
 `;
 
-export const Button = styled.Pressable`
+export const SaveButton = styled(Button)`
   width: 100%;
   height: ${RFValue(40)}px;
   align-items: center;

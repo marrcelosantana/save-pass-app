@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 
 import { RFValue } from "react-native-responsive-fontsize";
+import { Button } from "native-base";
 
 export const Container = styled.View`
   flex: 1;
@@ -37,13 +38,14 @@ export const Form = styled.View`
   margin-top: ${RFValue(-20)}px;
 `;
 
-export const SearchButton = styled.Pressable`
+export const SearchButton = styled(Button)`
   width: 15%;
   height: 48px;
   background-color: ${({ theme }) => theme.COLORS.YELLOW_500};
   align-items: center;
   justify-content: center;
   margin-left: -15%;
+  border-radius: 0;
 `;
 
 export const Info = styled.View`

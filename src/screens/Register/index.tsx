@@ -26,7 +26,7 @@ import { useAuth } from "@hooks/useAuth";
 import { useService } from "@hooks/useService";
 
 import {
-  Button,
+  SaveButton,
   ButtonText,
   Container,
   Content,
@@ -61,6 +61,7 @@ export function Register() {
   const { registerService } = useService();
 
   const [passwordIsHidden, setPasswordIsHidden] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -89,6 +90,7 @@ export function Register() {
     };
 
     try {
+      setIsLoading(true);
       await registerService(newService, user.id);
       reset();
 
@@ -107,6 +109,8 @@ export function Register() {
         background: "red.500",
         color: "gray.100",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -190,9 +194,12 @@ export function Register() {
             />
           </Form>
 
-          <Button onPress={handleSubmit(handleRegister)}>
+          <SaveButton
+            onPress={handleSubmit(handleRegister)}
+            isLoading={isLoading}
+          >
             <ButtonText>Salvar</ButtonText>
-          </Button>
+          </SaveButton>
         </Content>
       </Container>
     </TouchableWithoutFeedback>

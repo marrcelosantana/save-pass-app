@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { Pressable, View } from "react-native";
-import { useToast } from "native-base";
+import {
+  Keyboard,
+  Pressable,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
+import { useToast } from "native-base";
 import { useTheme } from "styled-components/native";
 import { CaretLeft, Eye, EyeSlash } from "phosphor-react-native";
 
@@ -57,7 +62,12 @@ export function Register() {
 
   const [passwordIsHidden, setPasswordIsHidden] = useState(true);
 
-  const { control, handleSubmit, reset } = useForm<FormDataProps>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormDataProps>({
     resolver: yupResolver(registerSchema),
   });
 
@@ -101,85 +111,90 @@ export function Register() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Pressable onPress={() => navigator.goBack()}>
-          <CaretLeft size={28} color={theme.COLORS.TEXT} />
-        </Pressable>
-        <HeaderTitle>Cadastro de senha</HeaderTitle>
-        <View />
-      </Header>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <Header>
+          <Pressable onPress={() => navigator.goBack()}>
+            <CaretLeft size={28} color={theme.COLORS.TEXT} />
+          </Pressable>
+          <HeaderTitle>Cadastro de senha</HeaderTitle>
+          <View />
+        </Header>
 
-      <Content>
-        <Form>
-          <Label>Nome do serviço</Label>
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Digite o nome..."
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
-        </Form>
+        <Content>
+          <Form>
+            <Label>Nome do serviço</Label>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  placeholder="Digite o nome..."
+                  value={value}
+                  onChangeText={onChange}
+                  errorMessage={errors.name?.message}
+                />
+              )}
+            />
+          </Form>
 
-        <Form>
-          <Label>E-mail</Label>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Digite o e-mail..."
-                value={value}
-                onChangeText={onChange}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            )}
-          />
-        </Form>
+          <Form>
+            <Label>E-mail</Label>
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  placeholder="Digite o e-mail..."
+                  value={value}
+                  onChangeText={onChange}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  errorMessage={errors.email?.message}
+                />
+              )}
+            />
+          </Form>
 
-        <Form>
-          <Label>Senha</Label>
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Digite a senha..."
-                value={value}
-                onChangeText={onChange}
-                secureTextEntry={passwordIsHidden}
-                rightElement={
-                  <Pressable onPress={handleShowPassword}>
-                    {passwordIsHidden ? (
-                      <EyeSlash
-                        size={22}
-                        color={theme.COLORS.TEXT_BODY}
-                        style={{ marginRight: 10 }}
-                      />
-                    ) : (
-                      <Eye
-                        size={24}
-                        color={theme.COLORS.TEXT_BODY}
-                        style={{ marginRight: 10 }}
-                      />
-                    )}
-                  </Pressable>
-                }
-              />
-            )}
-          />
-        </Form>
+          <Form>
+            <Label>Senha</Label>
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  placeholder="Digite a senha..."
+                  value={value}
+                  onChangeText={onChange}
+                  secureTextEntry={passwordIsHidden}
+                  errorMessage={errors.password?.message}
+                  rightElement={
+                    <Pressable onPress={handleShowPassword}>
+                      {passwordIsHidden ? (
+                        <EyeSlash
+                          size={22}
+                          color={theme.COLORS.TEXT_BODY}
+                          style={{ marginRight: 10 }}
+                        />
+                      ) : (
+                        <Eye
+                          size={24}
+                          color={theme.COLORS.TEXT_BODY}
+                          style={{ marginRight: 10 }}
+                        />
+                      )}
+                    </Pressable>
+                  }
+                />
+              )}
+            />
+          </Form>
 
-        <Button onPress={handleSubmit(handleRegister)}>
-          <ButtonText>Salvar</ButtonText>
-        </Button>
-      </Content>
-    </Container>
+          <Button onPress={handleSubmit(handleRegister)}>
+            <ButtonText>Salvar</ButtonText>
+          </Button>
+        </Content>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }

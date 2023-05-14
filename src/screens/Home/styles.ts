@@ -43,6 +43,7 @@ export const SearchButton = styled.Pressable`
   background-color: ${({ theme }) => theme.COLORS.YELLOW_500};
   align-items: center;
   justify-content: center;
+  margin-left: -15%;
 `;
 
 export const Info = styled.View`

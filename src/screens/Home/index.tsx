@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FlatList } from "react-native";
+import { FlatList, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { useToast } from "native-base";
 
 import { useTheme } from "styled-components/native";
@@ -70,9 +70,9 @@ export function Home() {
       setServices(filtered);
     } catch (error) {
       await toast.show({
-        title: "Não foi possível carregar os dados!",
+        title: "Os dados já estão carregados!",
         placement: "top",
-        background: "red.500",
+        background: "orange.500",
         color: "gray.100",
       });
     }
@@ -85,60 +85,62 @@ export function Home() {
   return (
     <>
       {services ? (
-        <Container>
-          <Header>
-            <UserInfo />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <Container>
+            <Header>
+              <UserInfo />
 
-            <AddButton onPress={goToRegister}>
-              <Plus size={22} color="#fff" />
-            </AddButton>
-          </Header>
+              <AddButton onPress={goToRegister}>
+                <Plus size={22} color="#fff" />
+              </AddButton>
+            </Header>
 
-          <Content>
-            <Form>
-              <Controller
-                control={control}
-                name="name"
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    w="85%"
-                    placeholder="Qual senha você procura?"
-                    value={value}
-                    onChangeText={onChange}
-                    autoCapitalize="none"
-                    autoComplete="off"
-                  />
+            <Content>
+              <Form>
+                <Controller
+                  control={control}
+                  name="name"
+                  render={({ field: { onChange, value } }) => (
+                    <Input
+                      w="85%"
+                      placeholder="Qual senha você procura?"
+                      value={value}
+                      onChangeText={onChange}
+                      autoCapitalize="none"
+                      autoComplete="off"
+                    />
+                  )}
+                />
+                <SearchButton onPress={handleSubmit(handleSearch)}>
+                  <MagnifyingGlass size={22} />
+                </SearchButton>
+              </Form>
+
+              <Info>
+                <Title numberOfLines={1}>Suas senhas</Title>
+                {services.length > 0 && (
+                  <Subtitle numberOfLines={1}>01 ao total</Subtitle>
                 )}
-              />
-              <SearchButton onPress={handleSubmit(handleSearch)}>
-                <MagnifyingGlass size={22} />
-              </SearchButton>
-            </Form>
+              </Info>
 
-            <Info>
-              <Title numberOfLines={1}>Suas senhas</Title>
-              {services.length > 0 && (
-                <Subtitle numberOfLines={1}>01 ao total</Subtitle>
-              )}
-            </Info>
-
-            <CardList>
-              <FlatList
-                data={services}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <Card service={item} />}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ paddingBottom: 24 }}
-                ListEmptyComponent={() => (
-                  <EmptyContent>
-                    <SmileySad size={42} color={theme.COLORS.TEXT_BODY} />
-                    <EmptyTitle>Sem registros no momento...</EmptyTitle>
-                  </EmptyContent>
-                )}
-              />
-            </CardList>
-          </Content>
-        </Container>
+              <CardList>
+                <FlatList
+                  data={services}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => <Card service={item} />}
+                  showsVerticalScrollIndicator={false}
+                  contentContainerStyle={{ paddingBottom: 24 }}
+                  ListEmptyComponent={() => (
+                    <EmptyContent>
+                      <SmileySad size={42} color={theme.COLORS.TEXT_BODY} />
+                      <EmptyTitle>Sem registros no momento...</EmptyTitle>
+                    </EmptyContent>
+                  )}
+                />
+              </CardList>
+            </Content>
+          </Container>
+        </TouchableWithoutFeedback>
       ) : (
         <Loading />
       )}

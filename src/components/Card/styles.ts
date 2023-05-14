@@ -12,7 +12,7 @@ export const Container = styled(LinearGradient).attrs({
 })`
   width: 100%;
   flex-direction: row;
-  height: ${RFValue(72)}px;
+  height: ${RFValue(82)}px;
   padding: 20px;
   border-radius: 3px;
   margin-bottom: 16px;
@@ -50,7 +50,20 @@ export const Subtitle = styled.Text<CardProps>`
   text-transform: lowercase;
 `;
 
+export const RightContent = styled.View`
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+export const DateInfo = styled.Text`
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  color: ${({ theme }) => theme.COLORS.TEXT_BODY};
+  font-size: ${RFValue(10)}px;
+`;
+
 export const RemoveButton = styled.Pressable`
   margin-bottom: ${RFValue(30)}px;
-  margin-right: ${RFValue(-8)}px;
+  margin-right: ${RFValue(-4)}px;
+  margin-top: ${RFValue(-4)}px;
 `;

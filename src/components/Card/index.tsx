@@ -6,6 +6,7 @@ import { useTheme } from "styled-components/native";
 
 import { Eye, EyeSlash, Trash } from "phosphor-react-native";
 import { ServiceDTO } from "@models/ServiceDTO";
+import { dateFormatter } from "@utils/formatters";
 
 import { useService } from "@hooks/useService";
 import { useAuth } from "@hooks/useAuth";
@@ -18,6 +19,8 @@ import {
   Subtitle,
   LeftContent,
   RemoveButton,
+  DateInfo,
+  RightContent,
 } from "./styles";
 
 interface Props {
@@ -85,9 +88,15 @@ export function Card({ service }: Props) {
         </Info>
       </LeftContent>
 
-      <RemoveButton onPress={handleRemoveService}>
-        <Trash size={22} color={theme.COLORS.TEXT_BODY} />
-      </RemoveButton>
+      <RightContent>
+        <RemoveButton onPress={handleRemoveService}>
+          <Trash size={22} color={theme.COLORS.TEXT_BODY} />
+        </RemoveButton>
+
+        <DateInfo>
+          {dateFormatter.format(new Date(service.created_at))}
+        </DateInfo>
+      </RightContent>
     </Container>
   );
 }

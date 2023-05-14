@@ -24,7 +24,7 @@ export async function storageServicesCreate(
   try {
     const storage = await storageServicesGetAll(userId);
 
-    const newStorage = JSON.stringify([...storage, service]);
+    const newStorage = JSON.stringify([service, ...storage]);
 
     await AsyncStorage.setItem(`${SERVICE_STORAGE}_user:${userId}`, newStorage);
   } catch (error) {

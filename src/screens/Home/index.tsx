@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FlatList, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { FlatList } from "react-native";
 import { useToast } from "native-base";
 
 import { useTheme } from "styled-components/native";
@@ -85,62 +85,60 @@ export function Home() {
   return (
     <>
       {services ? (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <Container>
-            <Header>
-              <UserInfo />
+        <Container>
+          <Header>
+            <UserInfo />
 
-              <AddButton onPress={goToRegister}>
-                <Plus size={22} color="#fff" />
-              </AddButton>
-            </Header>
+            <AddButton onPress={goToRegister}>
+              <Plus size={22} color="#fff" />
+            </AddButton>
+          </Header>
 
-            <Content>
-              <Form>
-                <Controller
-                  control={control}
-                  name="name"
-                  render={({ field: { onChange, value } }) => (
-                    <Input
-                      w="85%"
-                      placeholder="Qual senha você procura?"
-                      value={value}
-                      onChangeText={onChange}
-                      autoCapitalize="none"
-                      autoComplete="off"
-                    />
-                  )}
-                />
-                <SearchButton onPress={handleSubmit(handleSearch)}>
-                  <MagnifyingGlass size={22} />
-                </SearchButton>
-              </Form>
-
-              <Info>
-                <Title numberOfLines={1}>Suas senhas</Title>
-                {services.length > 0 && (
-                  <Subtitle numberOfLines={1}>01 ao total</Subtitle>
+          <Content>
+            <Form>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    w="85%"
+                    placeholder="Qual senha você procura?"
+                    value={value}
+                    onChangeText={onChange}
+                    autoCapitalize="none"
+                    autoComplete="off"
+                  />
                 )}
-              </Info>
+              />
+              <SearchButton onPress={handleSubmit(handleSearch)}>
+                <MagnifyingGlass size={22} />
+              </SearchButton>
+            </Form>
 
-              <CardList>
-                <FlatList
-                  data={services}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => <Card service={item} />}
-                  showsVerticalScrollIndicator={false}
-                  contentContainerStyle={{ paddingBottom: 24 }}
-                  ListEmptyComponent={() => (
-                    <EmptyContent>
-                      <SmileySad size={42} color={theme.COLORS.TEXT_BODY} />
-                      <EmptyTitle>Sem registros no momento...</EmptyTitle>
-                    </EmptyContent>
-                  )}
-                />
-              </CardList>
-            </Content>
-          </Container>
-        </TouchableWithoutFeedback>
+            <Info>
+              <Title numberOfLines={1}>Suas senhas</Title>
+              {services.length > 0 && (
+                <Subtitle numberOfLines={1}>01 ao total</Subtitle>
+              )}
+            </Info>
+
+            <CardList>
+              <FlatList
+                data={services}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <Card service={item} />}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingBottom: 24 }}
+                ListEmptyComponent={() => (
+                  <EmptyContent>
+                    <SmileySad size={42} color={theme.COLORS.TEXT_BODY} />
+                    <EmptyTitle>Sem registros no momento...</EmptyTitle>
+                  </EmptyContent>
+                )}
+              />
+            </CardList>
+          </Content>
+        </Container>
       ) : (
         <Loading />
       )}

@@ -61,8 +61,11 @@ export const DateInfo = styled.Text`
   font-size: ${RFValue(10)}px;
 `;
 
-export const RemoveButton = styled.Pressable`
+export const ActionButton = styled.Pressable``;
+
+export const Actions = styled.View`
   margin-bottom: ${RFValue(30)}px;
   margin-right: ${RFValue(-4)}px;
   margin-top: ${RFValue(-4)}px;
+  flex-direction: row;
 `;

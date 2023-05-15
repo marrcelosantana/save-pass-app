@@ -4,11 +4,14 @@ import { Alert } from "react-native";
 import { useToast } from "native-base";
 import { useTheme } from "styled-components/native";
 
-import { Eye, EyeSlash, Trash } from "phosphor-react-native";
+import { Eye, EyeSlash, Pencil, Trash } from "phosphor-react-native";
 import { ServiceDTO } from "@models/ServiceDTO";
 import { dateFormatter } from "@utils/formatters";
 
 import { useService } from "@hooks/useService";
+
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 import {
   Button,
@@ -17,9 +20,10 @@ import {
   Info,
   Subtitle,
   LeftContent,
-  RemoveButton,
   DateInfo,
   RightContent,
+  ActionButton,
+  Actions,
 } from "./styles";
 
 interface Props {
@@ -34,8 +38,14 @@ export function Card({ service }: Props) {
   const theme = useTheme();
   const toast = useToast();
 
+  const navigator = useNavigation<AppNavigatorRoutesProps>();
+
   function handleShowPassword() {
     setIsHidden(!isHidden);
+  }
+
+  function goToUpdate() {
+    navigator.navigate("update", { service });
   }
 
   async function onRemove() {
@@ -92,9 +102,15 @@ export function Card({ service }: Props) {
       </LeftContent>
 
       <RightContent>
-        <RemoveButton onPress={handleRemoveService}>
-          <Trash size={22} color={theme.COLORS.TEXT_BODY} />
-        </RemoveButton>
+        <Actions>
+          <ActionButton style={{ marginRight: 8 }} onPress={goToUpdate}>
+            <Pencil size={22} color={theme.COLORS.TEXT_BODY} />
+          </ActionButton>
+
+          <ActionButton onPress={handleRemoveService}>
+            <Trash size={22} color={theme.COLORS.TEXT_BODY} />
+          </ActionButton>
+        </Actions>
 
         <DateInfo>
           {dateFormatter.format(new Date(service.created_at))}

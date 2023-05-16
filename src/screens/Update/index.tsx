@@ -58,7 +58,7 @@ const registerSchema = yup.object({
 });
 
 export function Update() {
-  const { registerService } = useService();
+  const { updateService } = useService();
 
   const route = useRoute();
   const { service } = route.params as RouteParams;
@@ -69,7 +69,6 @@ export function Update() {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormDataProps>({
     resolver: yupResolver(registerSchema),
@@ -88,8 +87,38 @@ export function Update() {
     setPasswordIsHidden(!passwordIsHidden);
   }
 
-  async function handleUpdate(data: FormDataProps) {
-    console.log(data);
+  async function handleUpdate({ name, email, password }: FormDataProps) {
+    const newService: ServiceDTO = {
+      id: service.id,
+      name,
+      email,
+      password,
+      created_at: service.created_at,
+    };
+
+    try {
+      setIsLoading(true);
+
+      await updateService(service.id, newService);
+
+      await toast.show({
+        title: "Registro atualizado!",
+        placement: "top",
+        background: "green.500",
+        color: "gray.100",
+      });
+
+      navigator.navigate("home");
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível atualizar!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

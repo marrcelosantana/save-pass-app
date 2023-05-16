@@ -7,6 +7,7 @@ import {
   storageServicesCreate,
   storageServicesGetAll,
   storageServicesRemove,
+  storageServiceUpdate,
 } from "@storage/storageService";
 
 export type ServiceContextProps = {
@@ -15,6 +16,7 @@ export type ServiceContextProps = {
   loadServices: () => Promise<void>;
   registerService: (service: ServiceDTO) => Promise<void>;
   removeService: (serviceId: string) => Promise<void>;
+  updateService: (serviceId: string, setvice: ServiceDTO) => Promise<void>;
 };
 
 type ServiceContextProviderProps = {
@@ -49,6 +51,15 @@ export function ServiceContextProvider({
     }
   }
 
+  async function updateService(serviceId: string, service: ServiceDTO) {
+    try {
+      await storageServiceUpdate(user.id, serviceId, service);
+      loadServices();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function removeService(serviceId: string) {
     try {
       await storageServicesRemove(serviceId, user.id);
@@ -66,6 +77,7 @@ export function ServiceContextProvider({
         registerService,
         loadServices,
         removeService,
+        updateService,
       }}
     >
       {children}

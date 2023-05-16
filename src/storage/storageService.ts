@@ -32,6 +32,31 @@ export async function storageServicesCreate(
   }
 }
 
+export async function storageServiceUpdate(
+  userId: string,
+  serviceId: string,
+  updatedService: ServiceDTO
+) {
+  try {
+    const storage = await storageServicesGetAll(userId);
+
+    const service = storage.find((item) => item.id === serviceId);
+
+    if (service) {
+      (service.email = updatedService.email),
+        (service.name = updatedService.name),
+        (service.password = updatedService.password);
+    }
+
+    await AsyncStorage.setItem(
+      `${SERVICE_STORAGE}_user:${userId}`,
+      JSON.stringify(storage)
+    );
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function storageServicesRemove(serviceId: string, userId: string) {
   try {
     const storage = await storageServicesGetAll(userId);

@@ -21,7 +21,7 @@ export const Title = styled.Text`
 `;
 
 export const Subtitle = styled.Text`
-  font-size: ${RFValue(22)}px;
+  font-size: ${RFValue(20)}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   color: #fff;
 `;

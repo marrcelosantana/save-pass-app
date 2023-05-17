@@ -22,7 +22,7 @@ export function SignIn() {
     <Container>
       <Info>
         <Title>Hello!</Title>
-        <Subtitle>Welcome to Save Pass</Subtitle>
+        <Subtitle>Welcome to Save Pass :)</Subtitle>
       </Info>
 
       <Actions>

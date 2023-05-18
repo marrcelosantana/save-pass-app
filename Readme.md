@@ -30,10 +30,6 @@ $ expo start
 
 ### Imagens
 
-|                 Login                 |                Dashboard                 |
-| :-----------------------------------: | :--------------------------------------: |
-| <img src= "./screenshots/login.png" > | <img src= "./screenshots/dashboard.png"> |
-
-|                 Register                 |                Update                 |
-| :--------------------------------------: | :-----------------------------------: |
-| <img src= "./screenshots/register.png" > | <img src= "./screenshots/update.png"> |
+|                 Login                 |                Dashboard                 |                 Register                 |                Update                 |
+| :-----------------------------------: | :--------------------------------------: | :--------------------------------------: | :-----------------------------------: |
+| <img src= "./screenshots/login.png" > | <img src= "./screenshots/dashboard.png"> | <img src= "./screenshots/register.png" > | <img src= "./screenshots/update.png"> |
